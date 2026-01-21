@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Painel de Ferramentas - Thiago</title>
+<title>Ferramentas Thiago</title>
 
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
@@ -29,11 +29,10 @@ body{
   flex-direction:column;
 }
 
-/* HEADER */
 .header{
   display:flex;
   align-items:center;
-  gap:14px;
+  gap:12px;
   padding:14px 20px;
   border-bottom:1px solid var(--border);
   background:var(--bg-main);
@@ -42,9 +41,8 @@ body{
 
 .brand{
   font-weight:700;
-  color:var(--text-main);
-  margin-right:10px;
   white-space:nowrap;
+  margin-right:10px;
 }
 
 .tab{
@@ -68,13 +66,10 @@ body{
   position:absolute;
   inset:-6px;
   border-radius:18px;
-  box-shadow:
-    0 0 0 2px var(--accent),
-    0 0 28px rgba(155,226,13,.7);
+  box-shadow:0 0 0 2px var(--accent),0 0 28px rgba(155,226,13,.7);
   pointer-events:none;
 }
 
-/* CONTEÚDO */
 .wrapper{
   flex:1;
   display:flex;
@@ -100,6 +95,7 @@ body{
   justify-content:center;
   color:var(--text-secondary);
   font-size:14px;
+  text-align:center;
 }
 
 iframe{
@@ -110,18 +106,10 @@ iframe{
   border-radius:12px;
 }
 
-/* MOBILE */
 @media(max-width:768px){
-  .wrapper{
-    padding:16px 12px;
-  }
-  .panel{
-    padding:12px;
-  }
-  .tab{
-    font-size:14px;
-    padding:10px 14px;
-  }
+  .wrapper{padding:16px 12px}
+  .panel{padding:12px}
+  .tab{font-size:14px;padding:10px 14px}
 }
 </style>
 </head>
@@ -131,12 +119,11 @@ iframe{
 <div class="header">
   <div class="brand">Ferramentas Thiago</div>
 
-  <button class="tab active" onclick="abrirFerramenta(this,'comparador-ar.html')"
->
+  <button class="tab active" onclick="abrirFerramenta(this,'comparador-ar.html')">
     Comparador de Ar
   </button>
 
-  <button class="tab" onclick="abrirFerramenta(this,'ferramentas/ferramenta-2.html')">
+  <button class="tab" onclick="abrirFerramenta(this,'outra-ferramenta.html')">
     Outra Ferramenta
   </button>
 </div>
@@ -144,10 +131,12 @@ iframe{
 <div class="wrapper">
   <div class="panel">
     <div id="placeholder" class="placeholder">
-      Carregando ferramenta…
+      Selecione uma ferramenta acima.
     </div>
-    <iframe id="frame" src="comparador-ar.html" onload="esconderPlaceholder()"></iframe>
 
+    <iframe id="frame" src="comparador-ar.html"
+      onload="document.getElementById('placeholder').style.display='none';">
+    </iframe>
   </div>
 </div>
 
@@ -158,10 +147,6 @@ function abrirFerramenta(botao,arquivo){
 
   document.getElementById('placeholder').style.display='flex';
   document.getElementById('frame').src = arquivo;
-}
-
-function esconderPlaceholder(){
-  document.getElementById('placeholder').style.display='none';
 }
 </script>
 
