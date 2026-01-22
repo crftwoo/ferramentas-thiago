@@ -6,9 +6,7 @@
 <title>Ferramentas Thiago</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
+* { box-sizing: border-box; }
 
 body {
     margin: 0;
@@ -21,17 +19,35 @@ body {
 .header {
     display: flex;
     align-items: center;
-    gap: 12px;
     padding: 14px 20px;
     border-bottom: 1px solid #111;
 }
 
-.brand {
+.menu-icon-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    border: 1px solid #222;
+    background: #060606;
+    color: #9aff00;
+    font-size: 11px;
     font-weight: bold;
-    font-size: 18px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.menu-icon-btn:hover {
+    border-color: #9aff00;
+    box-shadow: 0 0 10px rgba(154,255,0,0.5);
 }
 
 /* TABS */
+.tabs {
+    display: none;
+    gap: 10px;
+    margin-left: 14px;
+}
+
 .tab {
     background: transparent;
     color: #fff;
@@ -42,19 +58,88 @@ body {
     transition: 0.2s;
 }
 
-.tab:hover {
-    border-color: #9aff00;
-}
+.tab:hover { border-color: #9aff00; }
 
 .tab.active {
     border-color: #9aff00;
     box-shadow: 0 0 12px rgba(154,255,0,0.6);
 }
 
-/* CONTEÚDO */
+/* MENU */
+.menu {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.menu-grid {
+    display: grid;
+    grid-auto-flow: row;
+    grid-template-columns: repeat(auto-fill, 250px);
+    justify-content: center;
+    gap: 48px;
+    width: 100%;
+}
+
+/* APP TILE */
+.menu-item {
+    width: 250px;
+    height: 250px;
+    background: radial-gradient(circle at top, #0f0f0f, #000);
+    border: 1px solid #111;
+    border-radius: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.menu-item:hover {
+    border-color: #9aff00;
+    box-shadow: 0 0 32px rgba(154,255,0,0.45);
+    transform: translateY(-4px);
+}
+
+.menu-item-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 20px;
+    background: #0b0b0b;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 34px;
+    color: #9aff00;
+    margin-bottom: 18px;
+}
+
+.menu-item-title {
+    font-size: 15px;
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* MOBILE */
+@media (max-width: 600px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+
+    .menu-item {
+        width: 100%;
+        max-width: 320px;
+        height: 220px;
+    }
+}
+
+/* CONTENT */
 .content {
     width: 100%;
     height: calc(100vh - 62px);
+    display: none;
 }
 
 iframe {
@@ -69,26 +154,60 @@ iframe {
 <body>
 
 <div class="header">
-    <div class="brand">Ferramentas Thiago</div>
+    <button class="menu-icon-btn" onclick="voltarMenu()">MENU</button>
 
-    <button class="tab active" onclick="abrirFerramenta(this,'comparador-ar.html')">
-        Comparador de Ar
-    </button>
-
-    <button class="tab" onclick="abrirFerramenta(this,'precificacao-ar.html')">
-        Precificação AR
-    </button>
+    <div class="tabs" id="tabs">
+        <button class="tab" onclick="abrirFerramenta(this,'comparador-ar.html')">Comparador</button>
+        <button class="tab" onclick="abrirFerramenta(this,'precificacao-ar.html')">Precificação</button>
+    </div>
 </div>
 
-<div class="content">
-    <iframe id="frame" src="comparador-ar.html"></iframe>
+<div class="menu" id="menu">
+    <div class="menu-grid">
+
+        <div class="menu-item" onclick="abrirViaMenu('comparador-ar.html')">
+            <div class="menu-item-icon">⇄</div>
+            <div class="menu-item-title">Comparador de Ar</div>
+        </div>
+
+        <div class="menu-item" onclick="abrirViaMenu('precificacao-ar.html')">
+            <div class="menu-item-icon">$</div>
+            <div class="menu-item-title">Precificação AR</div>
+        </div>
+
+    </div>
+</div>
+
+<div class="content" id="content">
+    <iframe id="frame"></iframe>
 </div>
 
 <script>
 function abrirFerramenta(botao, arquivo) {
     document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
     botao.classList.add('active');
+
+    document.getElementById('menu').style.display = 'none';
+    document.getElementById('content').style.display = 'block';
+    document.getElementById('tabs').style.display = 'flex';
+
     document.getElementById('frame').src = arquivo;
+}
+
+function abrirViaMenu(arquivo) {
+    const abas = document.querySelectorAll('.tab');
+    abas.forEach(tab => {
+        if (tab.getAttribute('onclick').includes(arquivo)) {
+            abrirFerramenta(tab, arquivo);
+        }
+    });
+}
+
+function voltarMenu() {
+    document.getElementById('frame').src = '';
+    document.getElementById('content').style.display = 'none';
+    document.getElementById('menu').style.display = 'flex';
+    document.getElementById('tabs').style.display = 'none';
 }
 </script>
 
