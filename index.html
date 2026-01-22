@@ -68,7 +68,8 @@ body {
 /* MENU */
 .menu {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     padding: 80px 20px;
 }
 
@@ -148,6 +149,17 @@ iframe {
     border: none;
     background: #000;
 }
+
+.menu-title {
+    width: 100%;
+    text-align: center;
+    font-size: 26px;
+    font-weight: 600;
+    margin-bottom: 64px;
+    color: #ffffff;
+    letter-spacing: 0.5px;
+}
+
 </style>
 </head>
 
@@ -163,6 +175,10 @@ iframe {
 </div>
 
 <div class="menu" id="menu">
+
+    <div class="menu-title">
+        Ferramentas – Thiago
+    </div>
     <div class="menu-grid">
 
         <div class="menu-item" onclick="abrirViaMenu('comparador-ar.html')">
