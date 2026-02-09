@@ -7,225 +7,77 @@
 
 <style>
 * { box-sizing: border-box; }
-
-body {
-    margin: 0;
-    background: #000;
-    color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-/* HEADER */
-.header {
-    display: flex;
-    align-items: center;
-    padding: 14px 20px;
-    border-bottom: 1px solid #111;
-}
-
-.menu-icon-btn {
-    width: 44px;
-    height: 44px;
-    border-radius: 12px;
-    border: 1px solid #222;
-    background: #060606;
-    color: #9aff00;
-    font-size: 11px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.menu-icon-btn:hover {
-    border-color: #9aff00;
-    box-shadow: 0 0 10px rgba(154,255,0,0.5);
-}
-
-/* TABS */
-.tabs {
-    display: none;
-    gap: 10px;
-    margin-left: 14px;
-}
-
-.tab {
-    background: transparent;
-    color: #fff;
-    border: 1px solid #222;
-    padding: 8px 18px;
-    border-radius: 22px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-.tab:hover { border-color: #9aff00; }
-
-.tab.active {
-    border-color: #9aff00;
-    box-shadow: 0 0 12px rgba(154,255,0,0.6);
-}
-
-/* MENU */
-.menu {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 80px 20px;
-}
-
-.menu-grid {
-    display: grid;
-    grid-auto-flow: row;
-    grid-template-columns: repeat(auto-fill, 250px);
-    justify-content: center;
-    gap: 48px;
-    width: 100%;
-}
-
-/* APP TILE */
-.menu-item {
-    width: 250px;
-    height: 250px;
-    background: radial-gradient(circle at top, #0f0f0f, #000);
-    border: 1px solid #111;
-    border-radius: 32px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    transition: 0.25s;
-}
-
-.menu-item:hover {
-    border-color: #9aff00;
-    box-shadow: 0 0 32px rgba(154,255,0,0.45);
-    transform: translateY(-4px);
-}
-
-.menu-item-icon {
-    width: 72px;
-    height: 72px;
-    border-radius: 20px;
-    background: #0b0b0b;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 34px;
-    color: #9aff00;
-    margin-bottom: 18px;
-}
-
-.menu-item-title {
-    font-size: 15px;
-    text-align: center;
-    line-height: 1.4;
-}
-
-/* MOBILE */
-@media (max-width: 600px) {
-    .menu-grid {
-        grid-template-columns: 1fr;
-        gap: 28px;
-    }
-
-    .menu-item {
-        width: 100%;
-        max-width: 320px;
-        height: 220px;
-    }
-}
-
-/* CONTENT */
-.content {
-    width: 100%;
-    height: calc(100vh - 62px);
-    display: none;
-}
-
-iframe {
-    width: 100%;
-    height: 100%;
-    border: none;
-    background: #000;
-}
-
-.menu-title {
-    width: 100%;
-    text-align: center;
-    font-size: 26px;
-    font-weight: 600;
-    margin-bottom: 64px;
-    color: #ffffff;
-    letter-spacing: 0.5px;
-}
-
+body { margin:0; background:#000; color:#fff; font-family:Arial,Helvetica,sans-serif; }
+.header{display:flex;align-items:center;padding:14px 20px;border-bottom:1px solid #111;}
+.menu-icon-btn{width:44px;height:44px;border-radius:12px;border:1px solid #222;background:#060606;color:#9aff00;font-size:11px;font-weight:bold;cursor:pointer;}
+.tabs{display:none;gap:10px;margin-left:14px;}
+.tab{background:transparent;color:#fff;border:1px solid #222;padding:8px 18px;border-radius:22px;cursor:pointer;}
+.tab.active{border-color:#9aff00;box-shadow:0 0 12px rgba(154,255,0,0.6);}
+.menu{display:flex;flex-direction:column;align-items:center;padding:80px 20px;}
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fill,250px);justify-content:center;gap:48px;width:100%;}
+.menu-item{width:250px;height:250px;background:radial-gradient(circle at top,#0f0f0f,#000);border:1px solid #111;border-radius:32px;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;}
+.menu-item-icon{width:72px;height:72px;border-radius:20px;background:#0b0b0b;display:flex;align-items:center;justify-content:center;font-size:34px;color:#9aff00;margin-bottom:18px;}
+.menu-item-title{text-align:center;}
+.content{width:100%;height:calc(100vh - 62px);display:none;}
+iframe{width:100%;height:100%;border:none;background:#000;}
+.menu-title{font-size:26px;margin-bottom:64px;}
 </style>
 </head>
-
 <body>
 
 <div class="header">
-    <button class="menu-icon-btn" onclick="voltarMenu()">MENU</button>
-
-    <div class="tabs" id="tabs">
-        <button class="tab" onclick="abrirFerramenta(this,'comparador-ar.html')">Comparador</button>
-        <button class="tab" onclick="abrirFerramenta(this,'precificacao-ar.html')">Precificação</button>
-    </div>
+  <button class="menu-icon-btn" onclick="voltarMenu()">MENU</button>
+  <div class="tabs" id="tabs"></div>
 </div>
 
 <div class="menu" id="menu">
-
-    <div class="menu-title">
-        Ferramentas – Thiago
-    </div>
-    <div class="menu-grid">
-
-        <div class="menu-item" onclick="abrirViaMenu('comparador-ar.html')">
-            <div class="menu-item-icon">⇄</div>
-            <div class="menu-item-title">Comparador de Ar</div>
-        </div>
-
-        <div class="menu-item" onclick="abrirViaMenu('precificacao-ar.html')">
-            <div class="menu-item-icon">$</div>
-            <div class="menu-item-title">Precificação AR</div>
-        </div>
-
-    </div>
+  <div class="menu-title">Ferramentas – Thiago</div>
+  <div class="menu-grid" id="menuGrid"></div>
 </div>
 
 <div class="content" id="content">
-    <iframe id="frame"></iframe>
+  <iframe id="frame"></iframe>
 </div>
 
 <script>
-function abrirFerramenta(botao, arquivo) {
-    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-    botao.classList.add('active');
+const ferramentas = [
+  { nome: "Comparador de Ar", arquivo: "comparador-ar.html", icone: "⇄" },
+  { nome: "Precificação AR", arquivo: "precificacao-ar.html", icone: "$" },
+  { nome: "Plano de Corte – Painéis", arquivo: "plano-corte.html", icone: "✂️" }
+];
 
-    document.getElementById('menu').style.display = 'none';
-    document.getElementById('content').style.display = 'block';
-    document.getElementById('tabs').style.display = 'flex';
+const tabs = document.getElementById("tabs");
+const menuGrid = document.getElementById("menuGrid");
 
-    document.getElementById('frame').src = arquivo;
+ferramentas.forEach(f => {
+  const tab = document.createElement("button");
+  tab.className = "tab";
+  tab.textContent = f.nome;
+  tab.onclick = () => abrirFerramenta(tab, f.arquivo);
+  tabs.appendChild(tab);
+
+  const card = document.createElement("div");
+  card.className = "menu-item";
+  card.onclick = () => abrirFerramenta(tab, f.arquivo);
+  card.innerHTML = `<div class="menu-item-icon">${f.icone}</div><div class="menu-item-title">${f.nome}</div>`;
+  menuGrid.appendChild(card);
+});
+
+function abrirFerramenta(botao, arquivo){
+  document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+  botao.classList.add("active");
+  menu.style.display="none";
+  content.style.display="block";
+  tabs.style.display="flex";
+  frame.src = arquivo;
 }
 
-function abrirViaMenu(arquivo) {
-    const abas = document.querySelectorAll('.tab');
-    abas.forEach(tab => {
-        if (tab.getAttribute('onclick').includes(arquivo)) {
-            abrirFerramenta(tab, arquivo);
-        }
-    });
-}
-
-function voltarMenu() {
-    document.getElementById('frame').src = '';
-    document.getElementById('content').style.display = 'none';
-    document.getElementById('menu').style.display = 'flex';
-    document.getElementById('tabs').style.display = 'none';
+function voltarMenu(){
+  frame.src="";
+  content.style.display="none";
+  menu.style.display="flex";
+  tabs.style.display="none";
 }
 </script>
-
 </body>
 </html>
